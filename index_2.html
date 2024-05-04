@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Form</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>List of Vegetables</h1>
+
+    <ul>
+        <li>
+            <img src="vegetable1.jpg" alt="Vegetable 1">
+            <span>Vegetable 1</span>
+        </li>
+        <li>
+            <img src="vegetable2.jpg" alt="Vegetable 2">
+            <span>Vegetable 2</span>
+        </li>
+        <!-- Add more vegetables as needed -->
+    </ul>
+
+    <h2>Submit Form</h2>
+
+    <form id="vegetableForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="vegetable">Choose a vegetable:</label>
+        <select id="vegetable" name="vegetable">
+            <option value="vegetable1">Vegetable 1</option>
+            <option value="vegetable2">Vegetable 2</option>
+            <!-- Add more options as needed -->
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('vegetableForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const formData = new FormData(this);
+
+            // Convert form data to URL-encoded format
+            const params = new URLSearchParams(formData);
+
+            // Example: Send data to a backend service using fetch
+            fetch('backend-url', {
+                method: 'POST',
+                body: params,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Example: Show success message
+                alert('Form submitted successfully!');
+
+                // Example: Send WhatsApp message
+                window.open(`https://wa.me/whatsapp-number?text=${encodeURIComponent(data.message)}`, '_blank');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Example: Show error message
+                alert('An error occurred. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
