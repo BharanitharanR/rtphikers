@@ -69,37 +69,45 @@
             background-color: #0056b3; /* Darker blue on hover */
         }
     </style>
-    <script>
-        function submitToWhatsApp() {
-            // Get name and phone number
-            var name = document.getElementById('name').value.trim();
-            var phoneNumber = document.getElementById('phone').value.trim();
+<script>
+    function submitToWhatsApp() {
+        // Get name and phone number
+        var name = document.getElementById('name').value.trim();
+        var phoneNumber = document.getElementById('phone').value.trim();
 
-            // Validate name and phone number
-            if (name === '' || phoneNumber === '') {
-                alert('Please enter your name and phone number.');
-                return;
-            }
-
-            // Get selected vegetables with cut type
-            var selectedVegetables = [];
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxes.forEach(function(checkbox) {
-                var vegetableName = checkbox.value;
-                var cutType = document.getElementById(vegetableName + '_cut').value;
-                selectedVegetables.push(vegetableName + ' (' + cutType + ')');
-            });
-
-            // Construct pre-filled message with selected vegetables, name, and phone number
-            var message = encodeURIComponent("Hello, my name is " + name + ". My phone number is " + phoneNumber + ". I'd like to order the following vegetables: " + selectedVegetables.join(', '));
-
-            // Construct WhatsApp link with pre-filled message
-            var whatsappLink = "https://wa.me/919398524428?text=" + message; // Replace 'whatsappphonenumber' with actual phone number
-
-            // Redirect to WhatsApp
-            window.location.href = whatsappLink;
+        // Validate name and phone number
+        if (name === '' || phoneNumber === '') {
+            alert('Please enter your name and phone number.');
+            return;
         }
-    </script>
+
+        // Get selected vegetables with cut type
+        var selectedVegetables = [];
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(function(checkbox) {
+            var vegetableName = checkbox.value;
+            
+            var cutType = document.getElementById(checkbox.id + '_cut').value;
+            selectedVegetables.push(vegetableName + ' (' + cutType + ')');
+        });
+
+        // Check if any vegetable is selected
+        if (selectedVegetables.length === 0) {
+            alert('Please select at least one vegetable.');
+            return;
+        }
+
+        // Construct pre-filled message with selected vegetables, name, and phone number
+        var message = encodeURIComponent("Hello, my name is " + name + ". My phone number is " + phoneNumber + ". I'd like to order the following vegetables: " + selectedVegetables.join(', '));
+
+        // Construct WhatsApp link with pre-filled message
+        var whatsappLink = "https://wa.me/919398524428?text=" + message; // Replace 'whatsappphonenumber' with actual phone number
+
+        // Redirect to WhatsApp
+        window.location.href = whatsappLink;
+    }
+</script>
+
 </head>
 <body>
     <header>
