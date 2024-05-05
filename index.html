@@ -109,6 +109,15 @@
             messagetext = messagetext + "\n" + "Your Delivery Slot: " + delslot;
             messagetext = messagetext.replace(/^\s*\n/gm, "");
 
+            var flatNumber = document.getElementById('flat').value.trim();
+            var streetAddress = document.getElementById('street-address').value.trim();
+            var landmark = document.getElementById('landmark').value.trim();
+
+            // Add address details to the message
+            messagetext += "Address:\n";
+            messagetext += "Flat/House Number: " + flatNumber + "\n";
+            messagetext += "Street Address: " + streetAddress + "\n";
+            messagetext += "Landmark: " + landmark;
             // Validate name and phone number
             /*if (name === '' || phoneNumber === '') {
                 alert('Please enter your name and phone number.');
